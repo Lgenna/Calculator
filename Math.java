@@ -93,4 +93,24 @@ public class Math extends Matrix {
         return new Matrix(resultArray);
     }
 
+    public Matrix power(Matrix m, int a){
+        if(a == 1){
+            return m;
+        }
+        else{
+            m = multiply(m, m);
+            return power(m, a-1);
+        }
+    }
+
+    public int power(int a, int n) {
+        if (n == 0) {
+            return 1;
+        }
+        else{
+            return (a * (power(a, n-1)));
+        }
+    }
 }
+
+
