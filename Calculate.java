@@ -1,3 +1,14 @@
+/**
+ *
+ * CSCI 338.001, 5/4/2019, Dr. Sheaffer
+ *
+ * Matrix operations
+ *
+ * @author Jonas Frankemölle
+ *
+ */
+
+
 public class Calculate extends Matrix {
 
     public Calculate() {
@@ -226,7 +237,7 @@ public class Calculate extends Matrix {
      *
      * @param m - first vector
      * @param n - second vector
-     * @return - resulting cross product 
+     * @return - resulting cross product
      */
     public Matrix crossProduct(Matrix m, Matrix n){
         int numColumnsN = n.getColumns();
