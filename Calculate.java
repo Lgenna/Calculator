@@ -5,13 +5,14 @@ public class Calculate extends Matrix {
     }
 
     /**
+     * Adds two Matrices of the same dimension
      *
-     * @param n
-     * @param m
-     * @return
+     * @param n - first Matrix
+     * @param m - second Matrix
+     * @return - resulting Matrix
      */
     public Matrix add(Matrix n, Matrix m) {
-        // Note: can only be added if same dimension!
+        // can only be added if same dimension!
         int[][] resultArray = new int[m.getRows()][m.getColumns()];
         int nData;
         int mData;
@@ -28,23 +29,25 @@ public class Calculate extends Matrix {
     }
 
     /**
+     * Adds together two integers
      *
-     * @param n
-     * @param m
-     * @return
+     * @param n - first integer
+     * @param m - second integer
+     * @return - resulting integer
      */
     public int add(int n, int m){
         return n + m;
     }
 
     /**
+     * Subtracts two Matrices of the same dimension
      *
-     * @param n
-     * @param m
-     * @return
+     * @param n - first matrix
+     * @param m - second matrix
+     * @return - the resulting matrix
      */
     public Matrix subtract(Matrix n, Matrix m) {
-        // Note: can only be added if same dimension!
+        // can only be added if same dimension!
         int[][] resultArray = new int[m.getRows()][m.getColumns()];
         int nData;
         int mData;
@@ -61,20 +64,22 @@ public class Calculate extends Matrix {
     }
 
     /**
+     * subtract two integers
      *
-     * @param n
-     * @param m
-     * @return
+     * @param n - first integer
+     * @param m - second integer
+     * @return - resulting integer
      */
     public int subtract(int n, int m){
         return n - m;
     }
 
     /**
+     * multiplies two matrices
      *
-     * @param n
-     * @param m
-     * @return
+     * @param n - first matrix
+     * @param m - second matrix
+     * @return - resulting matrix
      */
     public Matrix multiply(Matrix n, Matrix m) {
         // If A is an n × m matrix and B is an m × p matrix
@@ -101,20 +106,22 @@ public class Calculate extends Matrix {
     }
 
     /**
+     * multiplies two integers
      *
-     * @param n
-     * @param m
-     * @return
+     * @param n - first integer
+     * @param m - second integer
+     * @return - resulting integer
      */
     public int multiply(int n, int m){
         return n * m;
     }
 
     /**
+     * scale a Matrix
      *
-     * @param c
-     * @param m
-     * @return
+     * @param c - scalar (as an integer)
+     * @param m - matrix to be scaled
+     * @return - resulting matrix
      */
     public Matrix scalarMatrix(int c, Matrix m){
         int[][] resultArray = new int[m.getRows()][m.getColumns()];
@@ -127,9 +134,10 @@ public class Calculate extends Matrix {
     }
 
     /**
+     * transposes a matrix
      *
-     * @param m
-     * @return
+     * @param m - matrix to be transposed
+     * @return - resulting matrix
      */
     public Matrix transposeMatrix(Matrix m){
         int newRows = m.getColumns();
@@ -145,10 +153,11 @@ public class Calculate extends Matrix {
     }
 
     /**
+     * calculates the power of a matrix
      *
-     * @param m
-     * @param a
-     * @return
+     * @param m - matrix
+     * @param a - the amount of the power
+     * @return - resulting matrix
      */
     public Matrix power(Matrix m, int a){
         if(a == 1){
@@ -156,17 +165,15 @@ public class Calculate extends Matrix {
         }
         else{
             return (multiply(m, power(m, a-1)));
-
-            //m = multiply(m, m);
-            //return power(m, a-1);
         }
     }
 
     /**
+     * calculates the power of an integer
      *
-     * @param a
-     * @param n
-     * @return
+     * @param a - integer
+     * @param n - the amount of the power
+     * @return - resulting integer
      */
     public int power(int a, int n) {
         if (n == 0) {
@@ -178,19 +185,21 @@ public class Calculate extends Matrix {
     }
 
     /**
+     * calculates the determinant of a matrix
      *
-     * @param m
-     * @return
+     * @param m - matrix
+     * @return - the resulting determinant
      */
     public int determinant(Matrix m) {
         return m.getDeterminant();
     }
 
     /**
+     * calculates the dot product of two three dimensional vectors
      *
-     * @param n
-     * @param m
-     * @return
+     * @param n - first vector
+     * @param m - second vector
+     * @return - resulting dot product
      */
     public int dotProduct(Matrix n, Matrix m){
         int numColumnsN = n.getColumns();
@@ -213,10 +222,11 @@ public class Calculate extends Matrix {
     }
 
     /**
+     * calculates the cross product of two vectors
      *
-     * @param m
-     * @param n
-     * @return
+     * @param m - first vector
+     * @param n - second vector
+     * @return - resulting cross product 
      */
     public Matrix crossProduct(Matrix m, Matrix n){
         int numColumnsN = n.getColumns();
