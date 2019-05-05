@@ -1,4 +1,4 @@
-package calc.view;
+
 
 import javax.swing.*;
 import java.awt.BorderLayout;
@@ -46,16 +46,16 @@ public class CalculatorView extends JPanel implements ActionListener, KeyListene
 	JButton buttonNine = new JButton("9");
 	JButton buttonAdd = new JButton("+");
 	JButton buttonSub = new JButton("-");
-	JButton buttonMul = new JButton("×");
-	JButton buttonDiv = new JButton("÷");
+	JButton buttonMul = new JButton("x");
+	JButton buttonDiv = new JButton("/");
 	JButton buttonClear = new JButton("C");
 	JButton buttonCompute = new JButton("=");
 	JButton buttonMatrix = new JButton("[#]");
 	JButton buttonLeftPara = new JButton("(");
 	JButton buttonRightPara = new JButton(")");
-	JButton buttonDelete = new JButton("⌫");
+	JButton buttonDelete = new JButton("BS");
 	JButton buttonCarrot = new JButton("^");
-	JButton buttonDotProduct = new JButton("•");
+	JButton buttonDotProduct = new JButton(Character.toString((char)183));
 
 	JButton buttonAddRow = new JButton("Add Row");
 	JButton buttonRemoveRow = new JButton("Remove Row");
@@ -89,6 +89,7 @@ public class CalculatorView extends JPanel implements ActionListener, KeyListene
 
 	int currentVisibleRow = 2;
 	int currentVisibleColumn = 2;
+	String previousExp = "";
 
 	int[][] matrixLogic = { { 1, 1, 0, 0 }, { 1, 1, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
 
@@ -98,16 +99,20 @@ public class CalculatorView extends JPanel implements ActionListener, KeyListene
 	public void actionPerformed(ActionEvent e) {
 		String inputText = inputWindow.getText();
 		String historyText = historyWindow.getText();
+
 		if (e.getSource() == buttonCompute) {
 			// when button is pressed, pass input to parser and put the operation in
 			// historyWindow
 			// when the answer is returned from the parser, put it in the inputWindow and
 			// historyWindow
 
-			historyWindow.setText(historyText + "\n" + inputText);
-
+			historyWindow.setText(historyText + "\n" + previousExp + "\t\t" + inputText);
 		} else if (e.getSource() == buttonClear) {
-			inputWindow.setText("");
+			if(inputText.equals("")){
+				historyWindow.setText("Output");
+			}else{
+				inputWindow.setText("");
+			}
 		} else if (e.getSource() == buttonZero) {
 			inputWindow.setText(inputText + "0");
 		} else if (e.getSource() == buttonOne) {
@@ -133,19 +138,22 @@ public class CalculatorView extends JPanel implements ActionListener, KeyListene
 		} else if (e.getSource() == buttonSub) {
 			inputWindow.setText(inputText + "-");
 		} else if (e.getSource() == buttonMul) {
-			inputWindow.setText(inputText + "×");
+			inputWindow.setText(inputText + "x");
 		} else if (e.getSource() == buttonDiv) {
-			inputWindow.setText(inputText + "÷");
+			inputWindow.setText(inputText + "/");
 		} else if (e.getSource() == buttonCarrot) {
 			inputWindow.setText(inputText + "^");
 		} else if (e.getSource() == buttonDelete) {
-			inputWindow.setText(inputText.substring(0, inputText.length() - 1));
+			if(inputText.equals("")){}
+			else{
+				inputWindow.setText(inputText.substring(0, inputText.length() - 1));
+			}
 		} else if (e.getSource() == buttonLeftPara) {
 			inputWindow.setText(inputText + "(");
 		} else if (e.getSource() == buttonRightPara) {
 			inputWindow.setText(inputText + ")");
 		} else if (e.getSource() == buttonDotProduct) {
-			inputWindow.setText(inputText + "•");
+			inputWindow.setText(inputText + Character.toString((char)183));
 		} else if (e.getSource() == buttonMatrix) {
 			addAMatrix();
 		} else if (e.getSource() == buttonAddRow) {
@@ -208,7 +216,7 @@ public class CalculatorView extends JPanel implements ActionListener, KeyListene
 			inputWindow.setText(inputText.substring(0, inputText.length() - 1) + "÷");
 		}
 		if (key == 106) {
-			inputWindow.setText(inputText.substring(0, inputText.length() - 1) + "×");
+			inputWindow.setText(inputText.substring(0, inputText.length() - 1) + "x");
 		}
 		if (key == 10) {
 			inputWindow.setText(inputText.substring(0, inputText.length() - 1));
@@ -218,7 +226,7 @@ public class CalculatorView extends JPanel implements ActionListener, KeyListene
 		
 		if (pressed.size() > 1) {
 			if (pressed.contains(56) && pressed.contains(16)) {
-				inputWindow.setText(inputText.substring(0, inputText.length() - 1) + "×");
+				inputWindow.setText(inputText.substring(0, inputText.length() - 1) + "x");
 			}
 		}
 		pressed.clear();
@@ -592,8 +600,8 @@ public class CalculatorView extends JPanel implements ActionListener, KeyListene
 		historyWindow.setEditable(false);
 		Color lighterGray = new Color(210, 210, 210);
 		historyWindow.setBackground(lighterGray);
-		Font font = new Font("Segoe Script", Font.PLAIN, 14);
-		Font bolderFont = new Font("Segoe Script", Font.BOLD, 14);
+		Font font = new Font("Calibri", Font.PLAIN, 14);
+		Font bolderFont = new Font("Calibri", Font.BOLD, 14);
 		historyWindow.setFont(font);
 		inputWindow.setFont(font);
 		Color blue = new Color(51, 173, 255);
@@ -710,7 +718,8 @@ public class CalculatorView extends JPanel implements ActionListener, KeyListene
 	public String getInput() {
 		return inputWindow.getText();
 	}
-	public void setInput(String output) {		
+	public void setInput(String output) {	
+		previousExp = inputWindow.getText();
 		inputWindow.setText(output);
 	}
 
